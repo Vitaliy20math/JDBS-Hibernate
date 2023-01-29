@@ -8,9 +8,9 @@ import java.sql.SQLException;
 
 public class Util {
     // реализуйте настройку соеденения с БД
-    public static final String URL = "jdbc:mysql://localhost:3306/mydbtest_";
-    public static final String USER = "root";
-    public static final String PASSWORD = "root";
+    private static final String URL = "jdbc:mysql://localhost:3306/mydbtest_";
+    private static final String USER = "root";
+    private static final String PASSWORD = "root";
     public static Connection getConnection() {
         Connection connection = null;
         Driver driver;
@@ -25,7 +25,6 @@ public class Util {
             e.printStackTrace();
         }
         return connection;
+
     }
-
-
 }
