@@ -18,8 +18,9 @@ public class Util {
             driver = new com.mysql.cj.jdbc.Driver();
             DriverManager.registerDriver(driver);
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            if (!connection.isClosed())
+            if (!connection.isClosed()) {
                 System.out.println("Соединение установлено");
+            }
         } catch(SQLException e) {
             System.err.println("Соединение не установлено");
             e.printStackTrace();
