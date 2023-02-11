@@ -1075,7 +1075,7 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <CollationName>utf8mb4_0900_ai_ci</CollationName>
     </table>
     <column id="302" parent="300" name="id">
-      <AutoIncrement>17</AutoIncrement>
+      <AutoIncrement>16</AutoIncrement>
       <DasType>int|0s</DasType>
       <NotNull>1</NotNull>
       <Position>1</Position>
@@ -1111,16 +1111,19 @@ sys|schema||mysql.sys|localhost|TRIGGER|G</Grants>
       <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="309" parent="301" name="nameUser">
-      <DasType>varchar(10)|0s</DasType>
+    <column id="309" parent="301" name="name">
+      <DasType>varchar(255)|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="310" parent="301" name="lastNameUser">
-      <DasType>varchar(22)|0s</DasType>
+    <column id="310" parent="301" name="lastName">
+      <DasType>varchar(30)|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="311" parent="301" name="ageUser">
-      <DasType>tinyint|0s</DasType>
+    <column id="311" parent="301" name="age">
+      <DasType>int|0s</DasType>
+      <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
     <index id="312" parent="301" name="PRIMARY">
