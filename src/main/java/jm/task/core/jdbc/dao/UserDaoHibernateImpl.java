@@ -20,15 +20,17 @@ public class UserDaoHibernateImpl implements UserDao {
 
         try (Session session = Util.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
-            session.createSQLQuery("CREATE TABLE IF NOT EXISTS USERS \n" +
+            String createUsersTableCommand = "CREATE TABLE IF NOT EXISTS USERS \n" +
                     "(\n" +
                     "    id INT AUTO_INCREMENT PRIMARY KEY,\n" +
                     "    name VARCHAR(255) NOT NULL,\n" +
                     "    lastName VARCHAR(30) NOT NULL,\n" +
                     "    age int NOT NULL\n" +
                     "    \n" +
-                    ")").executeUpdate();
+                    ")";
+            session.createSQLQuery(createUsersTableCommand).executeUpdate();
         } catch (HibernateException e) {
+            transaction.rollback();
             e.printStackTrace();
         }
 
@@ -40,7 +42,8 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
-            session.createSQLQuery("drop table USERS").executeUpdate();
+            String dropUsers = "drop table USERS";
+            session.createSQLQuery(dropUsers).executeUpdate();
             transaction.commit();
             Util.getConnection().close();
 
@@ -102,7 +105,8 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
-            list = (List<User>)session.createSQLQuery("SELECT * FROM users").addEntity(User.class).list();
+            String getAllUsers = "SELECT * FROM users";
+            list = (List<User>)session.createSQLQuery(getAllUsers).addEntity(User.class).list();
             transaction.commit();
             Util.getConnection().close();
 
@@ -123,7 +127,8 @@ public class UserDaoHibernateImpl implements UserDao {
         try (Session session = Util.getSessionFactory().openSession()) {
 
             transaction = session.beginTransaction();
-            session.createSQLQuery("truncate table users").executeUpdate();
+            String cleanUsers = "truncate table users";
+            session.createSQLQuery(cleanUsers).executeUpdate();
             transaction.commit();
             Util.getConnection().close();
 
