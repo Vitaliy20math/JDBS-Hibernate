@@ -29,7 +29,7 @@ public class UserDaoHibernateImpl implements UserDao {
                     "    \n" +
                     ")";
             session.createSQLQuery(createUsersTableCommand).executeUpdate();
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
         }
@@ -47,11 +47,9 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
             Util.getConnection().close();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -60,17 +58,15 @@ public class UserDaoHibernateImpl implements UserDao {
         Transaction transaction = null;
         User user;
         try (Session session = Util.getSessionFactory().openSession()) {
-
+            transaction = session.beginTransaction();
             user = new User(name, lastName, age);
             session.save(user);
             transaction.commit();
             Util.getConnection().close();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -88,11 +84,9 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
             Util.getConnection().close();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -110,11 +104,9 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
             Util.getConnection().close();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
         return list;
     }
@@ -132,11 +124,9 @@ public class UserDaoHibernateImpl implements UserDao {
             transaction.commit();
             Util.getConnection().close();
 
-        } catch (HibernateException e) {
+        } catch (Exception e) {
             transaction.rollback();
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
     }
 }
